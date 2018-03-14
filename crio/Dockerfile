@@ -1,11 +1,12 @@
-FROM datica/crio-build:latest as build
+FROM datica/crio-build:v1.9.0 as build
 
 RUN make binaries
 
 FROM debian:jessie
 RUN apt-get update && \
     apt-get install -y lvm2 && \
-    apt-get install -y thin-provisioning-tools
+    apt-get install -y thin-provisioning-tools && \
+    apt-get install -y kmod
 
 COPY --from=build /lib/* /lib/
 
