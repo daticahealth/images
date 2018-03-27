@@ -25,3 +25,7 @@ RUN apt-get install -y -o DPkg::Options::=--force-confold \
 
 RUN pip install boto boto3
 RUN curl -L https://bootstrap.saltstack.com | sh -s -- -X git develop
+
+RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+RUN chmod +x ./kubectl
+RUN mv ./kubectl /usr/local/bin/kubectl
