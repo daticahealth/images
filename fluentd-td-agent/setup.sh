@@ -35,6 +35,7 @@ td-agent-gem install --no-document fluent-plugin-multi-format-parser -v 1.0.0
 td-agent-gem install --no-document fluent-plugin-elasticsearch -v 1.5.0
 td-agent-gem install --no-document fluent-plugin-s3 -v 1.0.0
 td-agent-gem install --no-document fluent-plugin-systemd -v 0.3.1
+td-agent-gem install --no-document fluent-plugin-copy_ex -v 0.1.0
 
 
 # install the fluent-plugin-loggly gem from Ruby Gems or from GitHub
