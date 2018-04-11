@@ -11,6 +11,8 @@ RUN echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/latest xenial mai
 RUN apt-get update
 RUN apt-get install -y salt-minion python-pip python-dev python-m2crypto git
 RUN pip install boto boto3
-RUN git clone --recursive https://github.com/kubernetes-client/python.git && cd python && python setup.py install
+RUN git clone --recursive https://github.com/kubernetes-client/python.git
+RUN pip install pyasn1==0.4.1
+RUN cd python && python setup.py install
 
 CMD ["/usr/bin/salt-minion", "-l", "info"]
