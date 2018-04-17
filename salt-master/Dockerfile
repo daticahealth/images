@@ -10,5 +10,7 @@ RUN wget -O - https://repo.saltstack.com/apt/ubuntu/16.04/amd64/2018.3/SALTSTACK
 RUN echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/2018.3 xenial main" > /etc/apt/sources.list.d/salt.list
 RUN apt-get update
 RUN apt-get install -y salt-master
+RUN apt-get install -y unzip
+RUN wget https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip && unzip terraform_0.11.7_linux_amd64.zip && mv terraform /usr/local/sbin/
 
-CMD salt-master --log-level debug --log-file /dev/stdout
+CMD ["/usr/bin/salt-master", "--log-level", "warning"]
