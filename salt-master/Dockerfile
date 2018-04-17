@@ -11,6 +11,4 @@ RUN echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/2018.3 xenial mai
 RUN apt-get update
 RUN apt-get install -y salt-master
 
-RUN ln -sf /dev/stdout /var/log/salt/master
-
-CMD ["/usr/bin/salt-master", "-d", "-l", "info"]
+CMD salt-master --log-level debug --log-file /dev/stdout
