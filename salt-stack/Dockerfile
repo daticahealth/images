@@ -4,8 +4,6 @@ MAINTAINER Datica <admin@datica.com>
 ENV DEBIAN_FRONTEND noninteractive
 ENV LC_ALL C
 
-ARG SALT_VER=latest
-
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y wget
