@@ -32,14 +32,10 @@ td-agent-gem install --no-document fluent-plugin-kubernetes_metadata_filter -v 0
 td-agent-gem install --no-document fluent-plugin-rewrite-tag-filter -v 2.0.2
 td-agent-gem install --no-document fluent-plugin-record-modifier -v 1.0.2
 td-agent-gem install --no-document fluent-plugin-multi-format-parser -v 1.0.0
-td-agent-gem install --no-document fluent-plugin-elasticsearch -v 1.5.0
-td-agent-gem install --no-document fluent-plugin-s3 -v 1.0.0
+td-agent-gem install --no-document fluent-plugin-elasticsearch -v 2.10.0
+td-agent-gem install --no-document fluent-plugin-s3 -v 1.1.2
 td-agent-gem install --no-document fluent-plugin-systemd -v 0.3.1
 td-agent-gem install --no-document fluent-plugin-copy_ex -v 0.1.0
-
-
-# install the fluent-plugin-loggly gem from Ruby Gems or from GitHub
-# td-agent-gem install --no-document fluent-plugin-loggly -v 0.0.9
 
 # Remove docs and postgres references
 rm -rf /opt/td-agent/embedded/share/doc \
