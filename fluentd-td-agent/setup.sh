@@ -37,6 +37,10 @@ td-agent-gem install --no-document fluent-plugin-s3 -v 1.1.2
 td-agent-gem install --no-document fluent-plugin-systemd -v 0.3.1
 td-agent-gem install --no-document fluent-plugin-copy_ex -v 0.1.0
 
+
+# Remove older gem versions (td-agent comes prepackaged with some of these, want newer versions)
+td-agent-gem cleanup
+
 # Remove docs and postgres references
 rm -rf /opt/td-agent/embedded/share/doc \
   /opt/td-agent/embedded/share/gtk-doc \
