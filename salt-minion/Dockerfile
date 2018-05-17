@@ -16,5 +16,6 @@ RUN pip install pyasn1==0.4.1
 RUN cd python && python setup.py install
 RUN apt-get install -y unzip
 RUN wget https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip && unzip terraform_0.11.7_linux_amd64.zip && mv terraform /usr/local/sbin/
+RUN apt-get install -y iptables-persistent
 
 CMD ["/usr/bin/salt-minion", "-l", "info"]
