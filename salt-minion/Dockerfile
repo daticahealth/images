@@ -40,5 +40,7 @@ RUN cd python && python setup.py install
 RUN wget https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip && unzip terraform_0.11.7_linux_amd64.zip && \
     mv terraform /usr/local/sbin/
 
+ENV PATH="/opt:${PATH}"
+
 CMD ["/usr/bin/salt-minion", "-l", "info"]
 
