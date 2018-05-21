@@ -6,8 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV LC_ALL C
 
 RUN apt-get update
-RUN 
-apt-get install -y \
+RUN apt-get install -y \
     wget \
     curl \
     lsb-core \
