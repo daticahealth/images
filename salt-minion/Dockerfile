@@ -6,7 +6,8 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV LC_ALL C
 
 RUN apt-get update
-RUN apt-get install -y \
+RUN 
+apt-get install -y \
     wget \
     curl \
     lsb-core \
@@ -30,7 +31,7 @@ RUN apt-get install -y \
     git \
     unzip \
     iptables-persistent \
-    docker-ce
+    docker-ce=17.12.1~ce-0~ubuntu
 
 RUN pip install boto boto3
 
