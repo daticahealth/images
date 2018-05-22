@@ -32,7 +32,7 @@ RUN apt-get install -y \
     iptables-persistent \
     docker-ce=17.12.1~ce-0~ubuntu
 
-RUN pip install boto boto3
+RUN pip install boto boto3 docker
 
 RUN git clone --recursive https://github.com/kubernetes-client/python.git
 RUN pip install pyasn1==0.4.1
