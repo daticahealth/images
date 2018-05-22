@@ -5,15 +5,16 @@ MAINTAINER Datica <admin@datica.com>
 ENV DEBIAN_FRONTEND noninteractive
 ENV LC_ALL C
 
-RUN apt-get update
-RUN apt-get install -y \
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
     wget \
     curl \
     lsb-core \
     apt-transport-https \
     ca-certificates \
     curl \
-    software-properties-common
+    software-properties-common && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN curl -fsSL https://repo.saltstack.com/apt/ubuntu/16.04/amd64/2018.3/SALTSTACK-GPG-KEY.pub | apt-key add -
 RUN echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/2018.3 xenial main" > /etc/apt/sources.list.d/salt.list
@@ -21,8 +22,8 @@ RUN echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/2018.3 xenial mai
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 RUN echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
 
-RUN apt-get update
-RUN apt-get install -y \
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
     salt-minion \
     python-pip \
     python-dev \
@@ -30,9 +31,10 @@ RUN apt-get install -y \
     git \
     unzip \
     iptables-persistent \
-    docker-ce=17.12.1~ce-0~ubuntu
-
-RUN pip install boto boto3 docker
+    docker-ce=17.12.1~ce-0~ubuntu && \
+    apt-get clean && \
+    pip install boto boto3 docker && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN git clone --recursive https://github.com/kubernetes-client/python.git
 RUN pip install pyasn1==0.4.1
