@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV LC_ALL C
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+    apt-get install -y \
     wget \
     curl \
     git \
