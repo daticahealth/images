@@ -12,7 +12,6 @@ RUN apt-get update && \
     lsb-core \
     apt-transport-https \
     ca-certificates \
-    curl \
     software-properties-common && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
