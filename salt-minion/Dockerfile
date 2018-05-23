@@ -9,9 +9,13 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     wget \
     curl \
+    git \
     lsb-core \
+    unzip \
+    iptables-persistent \
     apt-transport-https \
     ca-certificates \
+    docker-ce=17.12.1~ce-0~ubuntu \
     software-properties-common && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -28,10 +32,6 @@ RUN apt-get update && \
     python-pip \
     python-dev \
     python-m2crypto \
-    git \
-    unzip \
-    iptables-persistent \
-    docker-ce=17.12.1~ce-0~ubuntu && \
     pip install boto boto3 docker && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
