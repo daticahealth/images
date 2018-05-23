@@ -5,9 +5,6 @@ MAINTAINER Datica <admin@datica.com>
 ENV DEBIAN_FRONTEND noninteractive
 ENV LC_ALL C
 
-RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-RUN echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
-
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     wget \
@@ -18,7 +15,6 @@ RUN apt-get update && \
     iptables-persistent \
     apt-transport-https \
     ca-certificates \
-    docker-ce=17.12.1~ce-0~ubuntu \
     software-properties-common && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -26,12 +22,16 @@ RUN apt-get update && \
 RUN curl -fsSL https://repo.saltstack.com/apt/ubuntu/16.04/amd64/2018.3/SALTSTACK-GPG-KEY.pub | apt-key add -
 RUN echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/2018.3 xenial main" > /etc/apt/sources.list.d/salt.list
 
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+RUN echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
+
 RUN apt-get update && \
     apt-get install -y \
     salt-minion \
     python-pip \
     python-dev \
     python-m2crypto \
+    docker-ce=17.12.1~ce-0~ubuntu && \
     pip install boto boto3 docker && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
