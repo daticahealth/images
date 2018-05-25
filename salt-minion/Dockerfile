@@ -19,8 +19,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN curl -fsSL https://repo.saltstack.com/apt/ubuntu/16.04/amd64/2018.3/SALTSTACK-GPG-KEY.pub | apt-key add -
-RUN echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/2018.3 xenial main" > /etc/apt/sources.list.d/salt.list
+RUN curl -fsSL https://repo.saltstack.com/apt/ubuntu/16.04/amd64/2017.7/SALTSTACK-GPG-KEY.pub | apt-key add -
+RUN echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/2017.7 xenial main" > /etc/apt/sources.list.d/salt.list
 
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 RUN echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
@@ -45,4 +45,3 @@ RUN wget https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_
 ENV PATH="/opt:${PATH}"
 
 CMD ["/usr/bin/salt-minion", "-l", "info"]
-
