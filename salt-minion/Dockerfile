@@ -36,6 +36,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+COPY ./state.py /usr/lib/python2.7/dist-packages/salt/modules/
+
 RUN git clone --recursive https://github.com/kubernetes-client/python.git
 RUN pip install pyasn1==0.4.1
 RUN cd python && python setup.py install
@@ -45,4 +47,3 @@ RUN wget https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_
 ENV PATH="/opt:${PATH}"
 
 CMD ["/usr/bin/salt-minion", "-l", "info"]
-
