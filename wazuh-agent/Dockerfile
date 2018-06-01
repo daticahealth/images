@@ -19,3 +19,5 @@ RUN echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee /etc/apt/so
 
 RUN apt-get update && \
   apt-get install wazuh-agent
+
+ADD init.sh /var/ossec/bin/
