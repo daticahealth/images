@@ -22,9 +22,6 @@ RUN echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/2018.3 xenial mai
 RUN apt-get update
 RUN apt-get install -y salt-master
 
-ADD . /srv/salt
-
-COPY scripts/checks/cronschedule /var/spool/cron/crontabs/root
 RUN service cron start
 
 CMD ["/usr/bin/salt-master", "--log-level", "info"]
