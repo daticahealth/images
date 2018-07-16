@@ -4,7 +4,7 @@ DIRTOSCAN="/host";
 
 if ! pgrep "clamd" ; then
   nohup clamd &>/dev/null &
-  sleep 30
+  sleep 90
 fi
 
 for S in ${DIRTOSCAN}; do
