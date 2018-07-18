@@ -15,30 +15,26 @@ RUN echo "deb http://http.debian.net/debian/ stable main contrib non-free" > /et
         libclamunrar7 \
         wget && \
       apt-get clean && \
-      rm -rf /var/lib/apt/lists/*
-
-RUN wget -O /var/lib/clamav/main.cvd http://database.clamav.net/main.cvd && \
+      rm -rf /var/lib/apt/lists/* && \
+    wget -O /var/lib/clamav/main.cvd http://database.clamav.net/main.cvd && \
     wget -O /var/lib/clamav/daily.cvd http://database.clamav.net/daily.cvd && \
     wget -O /var/lib/clamav/bytecode.cvd http://database.clamav.net/bytecode.cvd && \
-    chown clamav:clamav /var/lib/clamav/*.cvd
-
-RUN mkdir /var/run/clamav && \
+    chown clamav:clamav /var/lib/clamav/*.cvd && \
+    mkdir /var/run/clamav && \
     chown clamav:clamav /var/run/clamav && \
-    chmod 0750 /var/run/clamav && \
+    chmod 0770 /var/run/clamav && \
     mkdir /var/log/clamav/clamdscan && \
     chown clamav:clamav /var/log/clamav/clamdscan && \
-    chmod 0750 /var/log/clamav/clamdscan
-
-RUN sed -i 's/^Foreground .*$/Foreground true/g' /etc/clamav/clamd.conf && \
+    chmod 0770 /var/log/clamav/clamdscan && \
+    sed -i 's/^Foreground .*$/Foreground true/g' /etc/clamav/clamd.conf && \
     sed -i 's/^Foreground .*$/Foreground true/g' /etc/clamav/freshclam.conf
 
 ADD ./clamscan_hourly.sh /var/run/clamav
-RUN chown clamav:clamav /var/run/clamav/clamscan_hourly.sh && \
-    chmod 0750 /var/run/clamav/clamscan_hourly.sh && \
-    ln /var/run/clamav/clamscan_hourly.sh /etc/cron.hourly/clamscan_hourly
-
 ADD ./run.sh /var/run/clamav
-RUN chown clamav:clamav /var/run/clamav/run.sh && \
-    chmod 0750 /var/run/clamav/run.sh
+RUN chown clamav:clamav /var/run/clamav/clamscan_hourly.sh && \
+    chmod 0770 /var/run/clamav/clamscan_hourly.sh && \
+    ln /var/run/clamav/clamscan_hourly.sh /etc/cron.hourly/clamscan_hourly && \
+    chown clamav:clamav /var/run/clamav/run.sh && \
+    chmod 0770 /var/run/clamav/run.sh
 
 CMD ["/var/run/clamav/run.sh"]
