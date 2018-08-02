@@ -2,7 +2,14 @@ FROM debian:stable
 
 MAINTAINER Datica Admin <admin@datica.com>
 
-ENV CLAMAV_VERSION 0.99.4
+ENV CLAMAV_VERSION 0.100.1
+
+RUN apt-get update && \
+    apt-get install -y \
+      rsyslog \
+      systemd && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN echo "deb http://http.debian.net/debian/ stable main contrib non-free" > /etc/apt/sources.list && \
     echo "deb http://http.debian.net/debian/ stable-updates main contrib non-free" >> /etc/apt/sources.list && \

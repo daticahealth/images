@@ -10,7 +10,7 @@ fi
 for S in ${DIRTOSCAN}; do
  DIRSIZE=$(du -sh "$S" 2>/dev/null | cut -f1);
 
- echo "Starting a daily scan of "$S" directory.
+ echo "Starting an hourly scan of "$S" directory.
  Amount of data to be scanned is "$DIRSIZE".";
 
  clamdscan -i -l "$LOGFILE" "$S";
