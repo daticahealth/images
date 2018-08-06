@@ -38,4 +38,6 @@ RUN wget -O - https://repo.saltstack.com/apt/ubuntu/18.04/amd64/latest/SALTSTACK
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-CMD ["/usr/bin/salt-master", "--log-level", "info"]
+ADD ./run.sh /var/run
+
+CMD ["/var/run/run.sh"]
