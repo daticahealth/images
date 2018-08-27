@@ -7,6 +7,10 @@ ENV LC_ALL C
 
 RUN apt-get update && \
     apt-get install -y \
+    jq \
+    cron \
+    vim \
+    cmake \
     wget \
     curl \
     git \
@@ -27,11 +31,17 @@ RUN echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_releas
 
 RUN apt-get update && \
     apt-get install -y \
-    salt-minion \
-    python-pip \
-    python-dev \
-    python-m2crypto \
-    docker-ce=17.12.1~ce-0~ubuntu && \
+        salt-minion \
+        python-git \
+        python-openssl \
+        python-dev \
+        python-pip \
+        python-pygit2 \
+        libffi-dev \
+        virt-what \
+        build-essential \
+        python-m2crypto \
+        docker-ce=17.12.1~ce-0~ubuntu && \
     pip install boto boto3 docker awscli && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
