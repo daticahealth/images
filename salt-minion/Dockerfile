@@ -32,7 +32,7 @@ RUN apt-get update && \
     python-dev \
     python-m2crypto \
     docker-ce=17.12.1~ce-0~ubuntu && \
-    pip install boto boto3 docker awscli && \
+    pip install boto "boto3<1.8.0" docker "awscli<1.16.0" && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
