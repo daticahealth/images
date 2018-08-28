@@ -19,6 +19,9 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+RUN wget https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip && unzip terraform_0.11.7_linux_amd64.zip && \
+    mv terraform /usr/local/sbin/
+
 RUN curl -fsSL https://repo.saltstack.com/apt/ubuntu/16.04/amd64/2018.3/SALTSTACK-GPG-KEY.pub | apt-key add -
 RUN echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/2018.3 xenial main" > /etc/apt/sources.list.d/salt.list
 
@@ -31,8 +34,9 @@ RUN apt-get update && \
     python-pip \
     python-dev \
     python-m2crypto \
-    docker-ce=17.12.1~ce-0~ubuntu && \
-    pip install \
+    docker-ce=17.12.1~ce-0~ubuntu
+
+RUN pip install \
         "pyasn1==0.4.1" \
         kubernetes \
         boto \
@@ -41,11 +45,6 @@ RUN apt-get update && \
         awscli && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
-# COPY ./state.py /usr/lib/python2.7/dist-packages/salt/modules/
-
-RUN wget https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip && unzip terraform_0.11.7_linux_amd64.zip && \
-    mv terraform /usr/local/sbin/
 
 ENV PATH="/opt:${PATH}"
 
