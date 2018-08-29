@@ -1,21 +1,34 @@
 FROM ubuntu:16.04
 
-MAINTAINER Datica <admin@datica.com>
+LABEL maintainer="Datica <admin@datica.com>"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LC_ALL C
 
 RUN apt-get update && \
     apt-get install -y \
-    wget \
-    curl \
-    git \
-    lsb-core \
-    unzip \
-    iptables-persistent \
-    apt-transport-https \
-    ca-certificates \
-    software-properties-common && \
+        jq \
+        wget \
+        curl \
+        git \
+        vim \
+        cmake \
+        lsb-core \
+        unzip \
+        iptables-persistent \
+        apt-transport-https \
+        ca-certificates \
+        software-properties-common \
+        gnupg \
+        virt-what \
+        libffi-dev \
+        libssl-dev \
+        python-pip \
+        python-dev \
+        python-openssl \
+        python-git \
+        python-pygit2 \
+        swig && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -28,16 +41,17 @@ RUN echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/2018.3 xenial mai
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 RUN echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
 
+# install salt before any pip installations - pip will change out the versions
+# of some of the dependencies later. salt seems to be ok with this.
 RUN apt-get update && \
     apt-get install -y \
-    salt-minion \
-    python-pip \
-    python-dev \
-    python-m2crypto \
-    docker-ce=17.12.1~ce-0~ubuntu
+        docker-ce=17.12.1~ce-0~ubuntu \
+        salt-minion
 
-RUN pip install \
+RUN pip  --disable-pip-version-check install \
         "pyasn1==0.4.1" \
+        M2crypto \
+        cffi \
         kubernetes \
         boto \
         boto3 \
