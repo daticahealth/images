@@ -13,7 +13,7 @@ for S in ${DIRTOSCAN}; do
  echo "Starting an hourly scan of "$S" directory.
  Amount of data to be scanned is "$DIRSIZE".";
 
- clamdscan -i -l "$LOGFILE" "$S";
+ clamdscan -i -l "$LOGFILE" "$S" --stdout;
 
  # get the value of "Infected lines"
  MALWARE=$(tail "$LOGFILE"|grep Infected|cut -d" " -f3);
