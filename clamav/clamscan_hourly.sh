@@ -1,5 +1,5 @@
 #!/bin/bash
-LOGFILE="/var/log/clamav/clamdscan/clamav-$(date +'%Y-%m-%d').log";
+LOGFILE="/var/log/clamav/clamscan-$(date +'%Y-%m-%d').log";
 DIRTOSCAN="/host";
 
 if ! pgrep "clamd" ; then
