@@ -30,9 +30,6 @@ RUN echo "deb http://http.debian.net/debian/ stable main contrib non-free" > /et
     mkdir /var/run/clamav && \
     chown clamav:clamav /var/run/clamav && \
     chmod 0770 /var/run/clamav && \
-    mkdir /var/log/clamav/clamdscan && \
-    chown clamav:clamav /var/log/clamav/clamdscan && \
-    chmod 0770 /var/log/clamav/clamdscan && \
     sed -i 's/^Foreground .*$/Foreground true/g' /etc/clamav/clamd.conf && \
     sed -i 's/^Foreground .*$/Foreground true/g' /etc/clamav/freshclam.conf
 
