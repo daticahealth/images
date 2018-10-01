@@ -1,3 +1,3 @@
 #!/bin/bash
 /etc/init.d/cron start
-freshclam -d
+freshclam -d -u root
