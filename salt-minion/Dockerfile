@@ -50,13 +50,13 @@ RUN apt-get update && \
 
 RUN pip  --disable-pip-version-check install \
         "pyasn1==0.4.1" \
-        M2crypto \
-        cffi \
-        kubernetes \
-        boto \
-        boto3 \
-        docker \
-        awscli && \
+        M2crypto==0.30.1 \
+        cffi==1.5.2 \
+        kubernetes==7.0.0 \
+        boto==2.49.0 \
+        boto3==1.8.3 \
+        docker==3.5.1 \
+        awscli==1.16.3 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
