@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-MAINTAINER Datica <admin@datica.com>
+LABEL maintainer="Datica <admin@datica.com>"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LC_ALL C
