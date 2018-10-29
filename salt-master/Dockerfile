@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-MAINTAINER Datica <admin@datica.com>
+LABEL maintainer="Datica <admin@datica.com>"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LC_ALL C
@@ -33,8 +33,9 @@ RUN wget -O - https://repo.saltstack.com/apt/ubuntu/18.04/amd64/latest/SALTSTACK
     libffi-dev \
     virt-what \
     build-essential && \
-    pip install cffi && \
-    pip install awscli && \
+    pip install \
+        cffi==1.5.2 \
+        awscli==1.16.3 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

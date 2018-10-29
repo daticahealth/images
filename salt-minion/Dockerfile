@@ -25,9 +25,8 @@ RUN apt-get update && \
         libssl-dev \
         python-pip \
         python-dev \
-        python-openssl \
-        python-git \
-        python-pygit2 \
+        libgit2-dev=0.24.1-2ubuntu0.2 \
+        git \
         swig && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -35,25 +34,29 @@ RUN apt-get update && \
 RUN wget https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip && unzip terraform_0.11.7_linux_amd64.zip && \
     mv terraform /usr/local/sbin/
 
-RUN curl -fsSL https://repo.saltstack.com/apt/ubuntu/16.04/amd64/2018.3/SALTSTACK-GPG-KEY.pub | apt-key add -
-RUN echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/2018.3 xenial main" > /etc/apt/sources.list.d/salt.list
-
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 RUN echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
 
-# install salt before any pip installations - pip will change out the versions
-# of some of the dependencies later. salt seems to be ok with this.
 RUN apt-get update && \
     apt-get install -y \
-        docker-ce=17.12.1~ce-0~ubuntu \
-        salt-minion
+        docker-ce=18.06.1~ce~3-0~ubuntu
 
-RUN pip  --disable-pip-version-check install \
-        "pyasn1==0.4.1" \
+RUN mkdir -p /opt/salt-build && \
+    git clone https://github.com/saltstack/salt.git -b 2018.3 --depth 1 /opt/salt-build && \
+    cd /opt/salt-build && \
+    python setup.py install && \
+    rm -rf ./*
+
+RUN pip install \
+        tornado \
+        jinja2 \
+        msgpack \
+        pyzmq \
+        pyasn1 \
         M2crypto \
         cffi \
+        "pygit2<0.25" \
         kubernetes \
-        boto \
         boto3 \
         docker \
         awscli && \
@@ -62,4 +65,4 @@ RUN pip  --disable-pip-version-check install \
 
 ENV PATH="/opt:${PATH}"
 
-CMD ["/usr/bin/salt-minion", "-l", "info"]
+CMD ["/usr/local/bin/salt-minion", "-l", "info"]
